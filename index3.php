@@ -384,7 +384,7 @@ to get the desired effect
                             <a href="#" class="nav-link">
                                 <i class="nav-icon fas fa-table"></i>
                                 <p>
-                                    Data Santri
+                                    Tables Data
                                     <i class="fas fa-angle-left right"></i>
                                 </p>
                             </a>

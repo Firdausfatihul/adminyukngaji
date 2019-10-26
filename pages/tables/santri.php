@@ -378,7 +378,7 @@
             <a href="#" class="nav-link active">
               <i class="nav-icon fas fa-table"></i>
               <p>
-                Tables
+                Tables Data
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
@@ -1587,8 +1587,7 @@
     <div class="float-right d-none d-sm-block">
       <b>Version</b> 3.0.0-rc.5
     </div>
-    <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong> All rights
-    reserved.
+    <strong>Copyright &copy; 2019 <a href="#">QBS Devs</a>.</strong> All rights reserved.
   </footer>
 
   <!-- Control Sidebar -->

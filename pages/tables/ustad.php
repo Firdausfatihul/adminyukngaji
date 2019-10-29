@@ -696,61 +696,7 @@
     <section class="content">
       <div class="row">
         <div class="col-12">
-          <div class="card">
-            <div class="card-header">
-              <h3 class="card-title">DataTable with minimal features & hover style</h3>
-            </div>
-            <!-- /.card-header -->
-            <div class="card-body">
-              <table id="example2" class="table table-bordered table-hover">
-                <thead>
-                <tr>
-                  <th>Id</th>
-                  <th>Name</th>
-                  <th>Umur</th>
-                  <th>Alamat</th>
-                  <th>Pendidikan</th>
-                  <th>Pengalaman</th>
-                  <th>Jadwal</th>
-                </tr>
-                </thead>
-                <tbody>
-                <?php
-                $conn = mysqli_connect("localhost", "root", "", "yukngajis");
-                if ($conn-> connect_error){
-                    die("Connection failed:". $conn-> connect_error);
-                }
-
-                $sql = "SELECT id, name, umur, alamat, pendidikan, pengalaman, jadwal FROM ustad";
-                $result = $conn-> query($sql);
-
-                if($result-> num_rows > 0){
-                    while($row = $result-> fetch_assoc()){
-                        echo "<tr><td>". $row["id"] ."</td><td>". $row["name"]. "</td><td>". $row["umur"]. "</td><td>". $row["alamat"]. "</td><td>". $row["pendidikan"]. "</td><td>". $row["pengalaman"]. "</td><td>". $row["jadwal"]. "</td></tr>";
-                    }
-                    echo "</table>";
-                }
-                else{
-                    echo "0 result";
-                }
-                
-                $conn-> close()
-            ?>
-                <tfoot>
-                <tr>
-                  <th>Id</th>
-                  <th>Name</th>
-                  <th>Umur</th>
-                  <th>Alamat</th>
-                  <th>Pendidikan</th>
-                  <th>Pengalaman</th>
-                  <th>Jadwal</th>
-                </tr>
-                </tfoot>
-              </table>
-            </div>
-            <!-- /.card-body -->
-          </div>
+          
           <!-- /.card -->
 
           <div class="card">

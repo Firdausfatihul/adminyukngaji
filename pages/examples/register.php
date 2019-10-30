@@ -1,3 +1,28 @@
+<?php
+  session_start();
+  //connect to database
+  $db = mysqli_connect("localhost", "root", "", "yukngajis");
+  if (isset($_POST['Register'])){
+    $fullname = mysqli_real_escape_string($db, $_POST['fullname']);
+    $email = mysqli_real_escape_string($db, $_POST['email']);
+    $password = mysqli_real_escape_string($db, $_POST['password']);
+    $konfirmasi = mysqli_real_escape_string($db, $_POST['konfirmasi']);
+    
+    if ($password == $konfirmasi){
+      //create user
+      $password = md5($password);
+      $sql = "INSERT INTO register(Fullname, Email, Sandi, Konfirmasisandi) VALUES('$fullname', '$email', '$password', '$konfirmasi')";
+      mysqli_query($db, $sql);
+      $_SESSION['message'] = "Sekarang kamu telah terlogin";
+      $_SESSION['Fullname'] = $fullname;
+      header("location: ../../index.php"); //redirect to index
+    }else{
+      // failed
+      $_SESSION['message'] = "Sandi tidak sama";
+    }
+  }
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,16 +46,16 @@
 <body class="hold-transition register-page">
 <div class="register-box">
   <div class="register-logo">
-    <a href="../../index2.html"><b>Admin</b>LTE</a>
+    <a href="../../index2.php"><b>Admin</b>LTE</a>
   </div>
 
   <div class="card">
     <div class="card-body register-card-body">
       <p class="login-box-msg">Register a new membership</p>
 
-      <form action="../../index.html" method="post">
+      <form action="" method="post">
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="Full name">
+          <input type="text" name="fullname" class="form-control" placeholder="Full name">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-user"></span>
@@ -38,7 +63,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="email" class="form-control" placeholder="Email">
+          <input type="email" name="email" class="form-control" placeholder="Email">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-envelope"></span>
@@ -46,7 +71,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Password">
+          <input type="password" name="password" class="form-control" placeholder="Password">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -54,7 +79,7 @@
           </div>
         </div>
         <div class="input-group mb-3">
-          <input type="password" class="form-control" placeholder="Retype password">
+          <input type="password" name="konfirmasi" class="form-control" placeholder="Retype password">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-lock"></span>
@@ -72,7 +97,7 @@
           </div>
           <!-- /.col -->
           <div class="col-4">
-            <button type="submit" class="btn btn-primary btn-block btn-flat">Register</button>
+            <button type="submit" name="Register" class="btn btn-primary btn-block btn-flat">Register</button>
           </div>
           <!-- /.col -->
         </div>

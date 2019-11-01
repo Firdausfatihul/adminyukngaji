@@ -1,6 +1,41 @@
+<?php
+    session_start();
+    if (isset($_POST['submit'])){
+        $con = mysqli_connect("localhost", "root", "", "yukngajis");
+        $imal = $_POST['imal'];
+        $ps = $_POST['pw'];
+
+        //prevent sql injection
+        $imal = stripslashes($imal);
+        $ps = stripslashes($ps);
+        $imal = mysqli_real_escape_string($con, $imal);
+        $ps = mysqli_real_escape_string($con, $ps);
+
+        //connect to server and select database
+        mysqli_connect('localhost', 'root', '');
+        mysqli_select_db($con, 'yukngajis');
+
+        //query the database
+        
+
+        if (empty($_POST['imal']) || empty($_POST['pw'])){
+            header("Location: login.php?Empty= Tolong Isi Yang Kosong");
+        }else{
+            $result = mysqli_query($con, "SELECT * FROM register WHERE Email = '$imal' AND Sandi = '$ps'") or die("Failed to query database ". mysqli_error($con));
+            $row = mysqli_fetch_array($result);
+
+            if ($row['Email'] == $imal && $row ['Sandi'] == $ps) {
+                $_SESSION['Email']= '<a href="#" class="d-block">'.$_POST["imal"].'</a>';
+                header("Location: ../../index3.php");
+            }else{
+                header("Location: login.php?Invalid= Password atau Email kamu salah");
+            }
+        }
+    }
+?>
+
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -26,13 +61,17 @@
             <a href="../../index2.php"><b>Admin</b>LTE</a>
         </div>
         <!-- /.login-logo -->
+        
+            <?php
+            ?>
+
         <div class="card">
             <div class="card-body login-card-body">
                 <p class="login-box-msg">Sign in to start your session</p>
 
-                <form action="../../index3.php" method="post">
+                <form action="login.php" method="post">
                     <div class="input-group mb-3">
-                        <input type="email" class="form-control" placeholder="Email">
+                        <input type="email" name= "imal" class="form-control" placeholder="Email">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-envelope"></span>
@@ -40,7 +79,7 @@
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input type="password" class="form-control" placeholder="Password">
+                        <input type="password" name="pw" class="form-control" placeholder="Password">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>
@@ -58,7 +97,7 @@
                         </div>
                         <!-- /.col -->
                         <div class="col-4">
-                            <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+                            <button type="submit" name="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
                         </div>
                         <!-- /.col -->
                     </div>

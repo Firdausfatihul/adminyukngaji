@@ -15,7 +15,7 @@
       mysqli_query($db, $sql);
       $_SESSION['message'] = "Sekarang kamu telah terlogin";
       $_SESSION['Fullname'] = $fullname;
-      header("location: ../../index.php"); //redirect to index
+      header("location: login.html"); //redirect to index
     }else{
       // failed
       $_SESSION['message'] = "Sandi tidak sama";
